@@ -10,13 +10,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String role; // Values: "ADMIN", "CITIZEN", "OBSERVER", "ANALYST"
     private String name;
+
+    // Combined unique and nullable constraints here
+    @Column(unique = true, nullable = false)
     private String email;
+
     private String password;
 
-    // Getters and Setters
+    private String role; // Values: "ADMIN", "CITIZEN", "OBSERVER", "ANALYST"
 
+    private String otp;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean isVerified = false;
+
+    // Default constructor (Required by JPA)
+    public User() {}
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -47,5 +59,29 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 }
